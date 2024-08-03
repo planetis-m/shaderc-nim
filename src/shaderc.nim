@@ -21,9 +21,10 @@ elif defined(macosx):
 else:
   {.error: "Shaderc integration not implemented on this platform".}
 
-{.passL: "-lshaderc_shared".}
 when defined(windows):
-  {.passL: "-L$VULKAN_SDK/lib".}
+  import std/os
+  {.passL: "-L" & getEnv("VULKAN_SDK") / "lib".}
+{.passL: "-lshaderc_shared".}
 
 # From status.h
 type
